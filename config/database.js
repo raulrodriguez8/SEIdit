@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectionStr = 'mongodb://127.0.0.1:27017/seidit'
+const connectionStr = 'mongodb://127.0.0.1:27017/myreddit'
 
 mongoose.connect(connectionStr,{
     useNewUrlParser: true,
@@ -18,4 +18,5 @@ mongoose.connection.on( 'disconnected', (err) => console.log(err) );
 module.exports = {
     User: require('../models/User'),
     Post: require('../models/Post'),
+    Comment: require('../models/Comment'),
 }

@@ -31,7 +31,7 @@ app.use(express.static('public'));
 
 // for our session 
 app.use( session({
-  store: new MongoStore({ url: 'mongodb://127.0.0.1:27017/seidit'}),
+  store: new MongoStore({ url: 'mongodb://127.0.0.1:27017/my-reddit'}),
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -53,16 +53,16 @@ app.use( ( req, res, next)  => {
 });
 
 /* routes */
-// post routes
+// user lands on the post route
 app.use( '/', routes.post ) ;
 
-// users routes 
+// users route is available as well 
 app.use('/users', routes.user );
 
 
 // Home landing page (for testing) http://localhost:3000
 app.get( '/', ( req, res ) => {
-  res.send('<h1>SEIdit!</h1><a href="/" >Log in to SEIdit</a>');
+  res.send('<h1>SEIdit!</h1><a href="/" >Log in to myReddit</a>');
   });
 
 app.listen(port, () => {
