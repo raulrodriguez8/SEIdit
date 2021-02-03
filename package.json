@@ -1,0 +1,25 @@
+{
+  "name": "seidit",
+  "version": "1.0.0",
+  "description": "a Software Engineering Immersive reddit clone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/raulrodriguez8/SEIdit.git"
+  },
+  "author": "Raul I Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raulrodriguez8/SEIdit/issues"
+  },
+  "homepage": "https://github.com/raulrodriguez8/SEIdit#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.14",
+    "morgan": "^1.10.0"
+  }
+}
