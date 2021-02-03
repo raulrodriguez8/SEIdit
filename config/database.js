@@ -1,18 +1,21 @@
 const mongoose = require('mongoose');
 
-const connectionStr = 'mongodb://127.0.0.1:27017/seidit-app';
+const connectionStr = 'mongodb://127.0.0.1:27017/seidit'
 
-mongoose.connect( connectionStr, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
+mongoose.connect(connectionStr,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 })
-.then( () => console.log('MongoDB connected...'))
-.catch( (err) => console.log( 'MongoDB connection error :(', err ) );
+
+.then( () => console.log('MongoDB connection ESTABLISHED :)'))
+.catch( (err) => console.log('MongoDB error', err))
+
 
 mongoose.connection.on( 'disconnected', (err) => console.log(err) );
 
 module.exports = {
-  Seidit: require('../models/Seidit'),
+    User: require('../models/User'),
+    Post: require('../models/Post'),
 }

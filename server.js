@@ -8,22 +8,25 @@ const port = 3000;
 //CONNECT TO DB
 require('./config/database');
 
-// const indexRouter = require('./routes/index');
-// const subRouter = require('./routes/subforum.js');
-// const postRouter = require('./routes/posting')
+//INTERNAL MODULES
+
 
 
 const app = express();
 
-
+//Set view engine to EJS
 app.set('view engine', 'ejs');
-
+//initialize morgan
 app.use(morgan('dev'));
+//initialize json for POST requests
 app.use(express.json());
+//initialize urlencoded for POST requests
 app.use(express.urlencoded({ extended: false }));
+//used to serve static files (images/css/js) from PUBLIC directory
 app.use(express.static('public'));
 
 // app.use('/', indexRouter);
+
 
 
 // Home landing page (for testing) http://localhost:3000
