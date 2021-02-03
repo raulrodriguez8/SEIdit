@@ -1,6 +1,9 @@
 //EXTERNAL MODULES
 const express = require('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 //.define port
 const port = 3000;
@@ -22,16 +25,44 @@ app.use(morgan('dev'));
 app.use(express.json());
 //initialize urlencoded for POST requests
 app.use(express.urlencoded({ extended: false }));
+app.use( methodOverride('_method'));
 //used to serve static files (images/css/js) from PUBLIC directory
 app.use(express.static('public'));
 
-// app.use('/', indexRouter);
+// for our session 
+app.use( session({
+  store: new MongoStore({ url: 'mongodb://127.0.0.1:27017/seidit'}),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 24 * 7 * 2 // two weeks 
+    }
+  }) 
+);
 
+app.use( ( req, res, next ) => {
+  console.log(`${req.method} ${req.originalUrl}`)
+  next();
+})
+
+// user authentication middleware
+app.use( ( req, res, next)  => {
+  app.locals.currentUser =  req.session.currentUser;
+  next();
+});
+
+/* routes */
+// post routes
+app.use( '/', routes.post ) ;
+
+// users routes 
+app.use('/users', routes.user );
 
 
 // Home landing page (for testing) http://localhost:3000
 app.get( '/', ( req, res ) => {
-  res.send('<h1>SEIdit!</h1><a href="/seidit/" >Log in to SEIdit</a>');
+  res.send('<h1>SEIdit!</h1><a href="/" >Log in to SEIdit</a>');
   });
 
 app.listen(port, () => {
